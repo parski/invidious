@@ -126,7 +126,7 @@ module Invidious::Routes::API::V1::Authenticated
       return error_json(400, "Invalid bookmark.")
     end
 
-    Invidious::Database::Users.boomark(user, id, seconds)
+    Invidious::Database::Users.bookmark(user, id, seconds)
     env.response.status_code = 204
   end
 
