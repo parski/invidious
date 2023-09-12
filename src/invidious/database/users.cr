@@ -79,6 +79,15 @@ module Invidious::Database::Users
     PG_DB.exec(request, user.email)
   end
 
+  def bookmark(user : User, vid : String, seconds : String)
+    request = <<-SQL
+      UPDATE users
+      SET bookmark = $2, vid = $1, email = $3
+    SQL
+
+    PG_DB.exec(request, vid, seconds, user.email)
+  end
+
   # -------------------
   #  Update (channels)
   # -------------------

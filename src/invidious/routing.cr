@@ -267,6 +267,8 @@ module Invidious::Routing
       delete "/api/v1/auth/history/:id", {{namespace}}::Authenticated, :mark_unwatched
       delete "/api/v1/auth/history", {{namespace}}::Authenticated, :clear_history
 
+      post "/api/v1/auth/progress/:id/bookmark/:seconds", {{namespace}}::Authenticated, :bookmark
+
       get "/api/v1/auth/feed", {{namespace}}::Authenticated, :feed
 
       get "/api/v1/auth/subscriptions", {{namespace}}::Authenticated, :get_subscriptions

@@ -113,6 +113,23 @@ module Invidious::Routes::API::V1::Authenticated
     env.response.status_code = 204
   end
 
+  def self.bookmark(env)
+    user = env.get("user").as(User)
+
+    id = env.params.url["id"]
+    if !id.match(/^[a-zA-Z0-9_-]{11}$/)
+      return error_json(400, "Invalid video id.")
+    end
+
+    seconds = env.params.url["seconds"]
+    if !id.match(/[-0-9]+/)
+      return error_json(400, "Invalid bookmark.")
+    end
+
+    Invidious::Database::Users.boomark(user, id, seconds)
+    env.response.status_code = 204
+  end
+
   def self.feed(env)
     env.response.content_type = "application/json"
 
